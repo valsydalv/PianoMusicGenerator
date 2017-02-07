@@ -5,8 +5,6 @@
 *.sln
 *.txt
 *.csproj
-*.config
-AssemblyInfo.cs
 
 # User-specific files
 *.suo
