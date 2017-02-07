@@ -1,0 +1,59 @@
+<html>
+<head>
+</head>
+<body>
+    <p style="text-align: center; font-size:large">
+        Press any key to start log
+    </p>
+
+    <p id="result">
+    </p>
+
+    <script>
+        result = document.getElementById("result");
+
+        document.onkeydown = function(e)
+        {
+            if(e.keyCode == 116 || e.keyCode == 17 || e.ctrlKey == true)
+                return;
+
+            if(isDown)
+                return;
+
+            isDown = true;
+
+            beforeLastKeyDownTime = lastKeyDownTime;
+            lastKeyDownTime = Date.now();
+
+            if(isActive == true)
+            {
+                result.innerHTML = result.innerHTML + "*" + ((lastKeyDownTime - beforeLastKeyDownTime) / 1000.0).toFixed(3) + ", ";
+            }
+            else
+            {
+                isActive = true;
+            }
+        }
+        document.onkeyup = function(e)
+        {
+            if(e.keyCode == 116 || e.keyCode == 17 || e.ctrlKey == true)
+                return;
+
+            isDown = false;
+
+            lastKeyUpTime = Date.now();
+            var pressTime = lastKeyUpTime - lastKeyDownTime;
+
+            result.innerHTML = result.innerHTML + "__!_=" + (pressTime / 1000.0).toFixed(3) + ", ";
+        }
+
+        var isDown = false;
+        var lastKeyUpTime = 0;
+        var lastKeyDownTime = 0;
+        var beforeLastKeyDownTime = 0;
+        var isActive = false;
+
+        var result;
+    </script>
+</body>
+</html>
